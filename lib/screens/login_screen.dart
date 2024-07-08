@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/main_menu.dart';
+import 'package:flutter_application_1/services/rest_service.dart';
 import 'package:flutter_application_1/widgets/my_title.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../services/storage_service.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -19,6 +23,15 @@ class LoginScreen extends StatelessWidget {
             await account.authentication;
         final String idToken = authentication.idToken ?? '';
         final String accessToken = authentication.accessToken ?? '';
+
+        if (idToken.isNotEmpty && accessToken.isNotEmpty){
+          SharedPreferences.getInstance().then((current) {
+            current.setString('idToken', idToken);
+            current.setString('email', account.email);
+            current.setString('name', account.displayName ?? '');
+            current.setString('Image', account.photoUrl ?? '');
+          });
+        }
 
         auth = (idToken.isNotEmpty || accessToken.isNotEmpty);
 
@@ -49,6 +62,10 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(onPressed: (){
               _handleAuth().then((ok){
                 if(ok){
+                  StorageService.getValue("idToken").then((jwt){
+                    RestService rs = RestService();
+                    rs.access(jwt);
+                  });
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context){
                         return const MainMenu();
