@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "84532805201",
+    "project_id": "liryfind",
+    "storage_bucket": "liryfind.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84532805201:android:d266fa8ead930ddfb0c270",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOo2vfpV2czAL7MIodCfTTYJy0LyXgQg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
