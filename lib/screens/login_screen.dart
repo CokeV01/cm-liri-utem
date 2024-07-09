@@ -35,8 +35,8 @@ class LoginScreen extends StatelessWidget {
 
         auth = (idToken.isNotEmpty || accessToken.isNotEmpty);
 
-        _logger.d(idToken);
-        _logger.d(accessToken);
+        _logger.d("Token de identificacion: $idToken");
+        _logger.d("Token de Acceso: $accessToken");
       }
     } catch (error, stackTrace) {
       auth = false;

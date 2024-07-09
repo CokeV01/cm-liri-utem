@@ -9,7 +9,6 @@ class RestService{
     'accept': _mime,
     'X-API-TOKEN': 'sebastian.cl',
     'X-API-KEY': 'aaa-bbb-ccc-ddd',
-    'userAgent': 'Dio'
   };
 
   static final Logger _logger = Logger();
