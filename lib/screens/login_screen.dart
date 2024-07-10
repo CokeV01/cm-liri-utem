@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/main_menu.dart';
+import 'package:flutter_application_1/services/google_service.dart';
 import 'package:flutter_application_1/services/rest_service.dart';
 import 'package:flutter_application_1/widgets/my_title.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,18 +10,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/storage_service.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-
+  const LoginScreen({super.key});
   static final _logger = Logger();
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  Future<bool> _handleAuth() async {
+  /*static final _logger = Logger();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);*/
+
+  /*Future<bool> _handleAuth() async {
     bool auth = false;
     try {
       final GoogleSignInAccount? account = await _googleSignIn.signIn();
       if (account != null) {
-        GoogleSignInAuthentication authentication =
-            await account.authentication;
+        GoogleSignInAuthentication authentication = await account.authentication;
         final String idToken = authentication.idToken ?? '';
         final String accessToken = authentication.accessToken ?? '';
 
@@ -30,10 +31,13 @@ class LoginScreen extends StatelessWidget {
             current.setString('email', account.email);
             current.setString('name', account.displayName ?? '');
             current.setString('Image', account.photoUrl ?? '');
+
+            RestService rs = RestService();
+            rs.access(accessToken);
           });
         }
 
-        auth = (idToken.isNotEmpty || accessToken.isNotEmpty);
+        auth = (idToken.isNotEmpty && accessToken.isNotEmpty);
 
         _logger.d("Token de identificacion: $idToken");
         _logger.d("Token de Acceso: $accessToken");
@@ -46,6 +50,7 @@ class LoginScreen extends StatelessWidget {
     return auth;
   }
 
+  */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,12 +65,20 @@ class LoginScreen extends StatelessWidget {
               height: 17.0,
             ),
             ElevatedButton(onPressed: (){
-              _handleAuth().then((ok){
+              GoogleService.logIn().then((result){
+                if (result){
+                  _logger.d("Autentificado");
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context){
+                      return const MainMenu();
+                    },
+                  ));
+                }else{
+                  _logger.e("Falló la Autenticación");
+                }
+              });
+              /*_handleAuth().then((ok){
                 if(ok){
-                  StorageService.getValue("idToken").then((jwt){
-                    RestService rs = RestService();
-                    rs.access(jwt);
-                  });
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context){
                         return const MainMenu();
@@ -74,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                 }else{
                   _logger.e("Falló la Autenticación");
                 }
-              });
+              });*/
             }, child: const Text('Acceder con Google')),
           ],
         ),
