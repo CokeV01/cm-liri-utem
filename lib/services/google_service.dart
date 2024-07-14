@@ -7,7 +7,8 @@ class GoogleService {
   static final Logger _logger = Logger();
 
   static final GoogleSignIn _googleSignIn =
-  GoogleSignIn(scopes: ['email', 'profile']);
+  GoogleSignIn(clientId: '84532805201-9e5cobl301r9avo7mbb6hjj2i0brs86o.apps.googleusercontent.com',
+      scopes: ['email', 'profile']);
 
   static Future<bool> logIn() async {
     bool ok = false;

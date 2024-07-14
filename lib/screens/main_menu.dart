@@ -24,8 +24,7 @@ class MainMenu extends StatelessWidget {
             const SizedBox(
               height: 100.0,
             ),
-            const LyButtons(texto: 'Buscar Lyrics', route: LyScreen(),
-            ),
+            const LyButtons(texto: 'Buscar Lyrics', route: LyScreen()),
             const SizedBox(height: 16.0),
             const LyButtons(texto: 'Tus Lyrics', route: FavSongs()),
             const SizedBox(height: 16.0),

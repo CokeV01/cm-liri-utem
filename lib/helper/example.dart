@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 void main() {
   runApp(MyApp());
@@ -8,81 +10,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dynamic Buttons List',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
+      home: FileListScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class FileListScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _FileListScreenState createState() => _FileListScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _controller = TextEditingController();
-  int _buttonCount = 0;
-
-  void _generateButtons() {
-    setState(() {
-      _buttonCount = int.tryParse(_controller.text) ?? 0;
-    });
-  }
+class _FileListScreenState extends State<FileListScreen> {
+  List<FileSystemEntity> _files = [];
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _loadFiles();
+  }
+
+  Future<void> _loadFiles() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final files = directory.listSync();
+    setState(() {
+      _files = files;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dynamic Buttons List'),
+        title: Text('Archivos Locales'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                labelText: 'Enter number of buttons',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _generateButtons,
-              child: Text('Generate Buttons'),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _buttonCount,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Acción para cada botón
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Button ${index + 1} pressed')),
-                        );
-                      },
-                      child: Text('Button ${index + 1}'),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+      body: _files.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+        itemCount: _files.length,
+        itemBuilder: (context, index) {
+          final file = _files[index];
+          return ListTile(
+            title: Text(file.path.split('/').last),
+            onTap: () {
+              // Maneja la acción cuando se presiona el botón
+              print('File tapped: ${file.path}');
+            },
+          );
+        },
       ),
     );
   }
