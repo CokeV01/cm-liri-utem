@@ -32,7 +32,8 @@ class _FavlirScreen extends State<FavlirScreen>{
             children: [
               Center(
                 child: Text(
-                  widget.song.path.split('/').last.split(' - ').first,
+                  widget.song.path.split('/').last.split(' - ').last,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 25.0,
                     color: Colors.white,
@@ -42,13 +43,13 @@ class _FavlirScreen extends State<FavlirScreen>{
               ),
               const SizedBox(height: 2),
               Text(
-                widget.song.path.split('/').last.split(' - ').last,
+                widget.song.path.split('/').last.split(' - ').first,
                 style: const TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
                   fontFamily: 'LobsterFont',
                 ),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50),
               FutureBuilder<String>(
