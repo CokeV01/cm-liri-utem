@@ -64,7 +64,6 @@ class _LyScreen extends State<LyScreen>{
                 ),
               )),
               const SizedBox(height: 15),
-
               //Texto del Nombre de la canción
               Center(child: SizedBox(
                 height: 45,
@@ -83,7 +82,6 @@ class _LyScreen extends State<LyScreen>{
                 ),
               )),
               const SizedBox(height: 10,),
-
               //Boton Buscar Cancion
               Center(child: ElevatedButton(
                 onPressed: () async {
@@ -100,7 +98,6 @@ class _LyScreen extends State<LyScreen>{
                   }
                 },
                 child: const Text("Buscar Lyrics"),
-
               ))
             ],
           ),
