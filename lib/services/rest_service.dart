@@ -13,19 +13,15 @@ class RestService{
 
   static final Logger _logger = Logger();
   static final Dio _client = Dio();
-  Future<void> allAccess(String idToken, String email) async{
 
-    Map<String, String> headers2 ={
-      'accept': _mime,
-      'X-API-TOKEN': 'sebastian.cl',
-      'X-API-KEY': 'aaa-bbb-ccc-ddd',
-      'email': email
-    };
+  Future<String> allAccess(String idToken, String email) async{
 
     _logger.d("Acceso para consulta de ingreso del EMAIL: $email");
     JwtVo vo = JwtVo();
     vo.jwt = idToken;
-    const String url = '$_baseUrl/v1/access/all';
+
+    String utfEmail = Uri.encodeComponent(email);
+    String url = '$_baseUrl/v1/access/all?email=$utfEmail';
 
     _client.interceptors.add(LogInterceptor(
         request: true,
@@ -36,10 +32,9 @@ class RestService{
     ));
 
     Response<String> response = await _client.get(url,
-        data: vo.toJson(), options: Options(headers: headers2));
+        options: Options(headers: _headers));
     final int status = response.statusCode ?? 400;
     final String jsonResponse = response.data ?? '';
-    _logger.i(jsonResponse);
 
     if(status >= 200 && status < 300){
       _logger.i('Respuesta con codigo $status');
@@ -48,6 +43,7 @@ class RestService{
       _logger.e("Respuesta Incorrecta con codigo $status");
       _logger.e(jsonResponse);
     }
+    return jsonResponse;
   }
 
   Future<void> access(String idToken) async{
@@ -82,4 +78,7 @@ class RestService{
       _logger.d(stackTrace.toString());
     }
   }
+
 }
+
+

@@ -29,7 +29,7 @@ class GoogleService {
             current.setString('name', account.displayName ?? '');
             current.setString('image', account.photoUrl ?? '');
             RestService rs = RestService();
-            rs.allAccess(idToken, account.email);
+            //rs.allAccess(idToken, account.email);
             rs.access(idToken);
           });
           ok = true;
@@ -57,5 +57,23 @@ class GoogleService {
       _logger.e(error);
       _logger.d(stackTrace.toString());
     }
+  }
+
+  static Future<String> getEmail() async{
+    String email = "";
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    email =  prefs.getString('email') ?? "no mail";
+    return email;
+  }
+
+  static Future<String> getID() async{
+    String Idtoken = "";
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    Idtoken =  prefs.getString('idToken') ?? "no mail";
+    return Idtoken;
   }
 }

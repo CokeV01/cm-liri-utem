@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/access_list.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
 import 'package:flutter_application_1/services/google_service.dart';
 import 'package:flutter_application_1/widgets/my_bar.dart';
+import 'package:flutter_application_1/widgets/my_buttons.dart';
 
 import '../widgets/exit_conf.dart';
 
@@ -33,7 +35,9 @@ class _Options extends State<Options>{
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => const LoginScreen()));
               }
-            }, child: const Text("Cerrar Sesión de Google"))
+            }, child: const Text("Cerrar Sesión de Google")),
+            SizedBox(height: 5),
+            const LyButtons(texto: "Lista de accesos a la aplicación", route: AccessList())
           ],
         )
       )

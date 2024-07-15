@@ -17,7 +17,6 @@ class LoginScreen extends StatelessWidget {
         },
         child: Scaffold(
         body: Padding(
-
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
