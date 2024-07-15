@@ -24,7 +24,7 @@ class _FavlirScreen extends State<FavlirScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyBar(),
+      appBar: const MyBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

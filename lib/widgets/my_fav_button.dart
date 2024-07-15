@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/exit_conf.dart';
 import 'package:genius_lyrics/models/song.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,7 +8,8 @@ import 'package:path_provider/path_provider.dart';
 
 class MyFavBar extends StatefulWidget implements PreferredSizeWidget{
   final Song cancion;
-  const MyFavBar({super.key, required this.cancion});
+  final Conf confi = Conf();
+  MyFavBar({super.key, required this.cancion});
 
   @override
   _MyFavButton createState() => _MyFavButton();
@@ -57,7 +59,10 @@ class _MyFavButton extends State<MyFavBar>{
       ),
       actions: [
         IconButton(onPressed: () async {
-          saveSong(song: widget.cancion);
+          bool result = await widget.confi.showConfirmationDialog(context, "Agregar canción", "¿Quieres agregar esta canción?");
+          if(result){
+            saveSong(song: widget.cancion);
+          }
         }, icon: const Icon(Icons.star_border),color: Colors.black)
       ],
     );

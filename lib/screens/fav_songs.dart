@@ -81,20 +81,18 @@ class _FavSongs extends State<FavSongs>{
             ),
           ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(child: _filteredFiles.isEmpty ? const Center(child: CircularProgressIndicator()) : ListView.builder(
             itemCount: _filteredFiles.length,
               itemBuilder: (context, index){
                 final sang = _filteredFiles[index];
                 return Padding(padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16.0),
                 child: LyButtons(texto: sang.path.split('/').last, route: FavlirScreen(song: sang)),
-                );
-              })
-
+              );
+            })
           )
         ],
       )
-
     );
   }
 }

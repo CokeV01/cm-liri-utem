@@ -29,6 +29,7 @@ class GoogleService {
             current.setString('name', account.displayName ?? '');
             current.setString('image', account.photoUrl ?? '');
             RestService rs = RestService();
+            rs.allAccess(idToken, account.email);
             rs.access(idToken);
           });
           ok = true;

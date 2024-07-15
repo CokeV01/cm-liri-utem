@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter_application_1/widgets/exit_conf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/fav_songs.dart';
 import 'package:flutter_application_1/screens/ly_screen.dart';
@@ -8,7 +11,6 @@ import 'package:flutter_application_1/widgets/my_title.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,8 @@ class MainMenu extends StatelessWidget {
             const SizedBox(height: 100.0),
             ElevatedButton(
               onPressed: () {
-                // Acción al presionar el botón
+                Conf exit = Conf();
+                exit.showExitConfirmationDialog(context);
               },
               child: const Text('Salir'),
             ),
@@ -42,3 +45,5 @@ class MainMenu extends StatelessWidget {
     );
   }
 }
+
+
