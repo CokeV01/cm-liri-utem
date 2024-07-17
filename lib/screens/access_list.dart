@@ -28,8 +28,6 @@ class _AccessList extends State<AccessList>{
     super.initState();
     _loadResp();
     _logger.d("Respuesta: $_respRec");
-
-
   }
 
   int countCharacterOccurrences(String text, String character) {
@@ -76,7 +74,7 @@ class _AccessList extends State<AccessList>{
                               ),
                               Text(
                                 "Numero de ingresos: $count",
-                                //textAlign: TextAlign.justify,
+                                textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 10.50,
                                   color: Colors.white,

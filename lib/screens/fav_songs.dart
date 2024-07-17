@@ -82,6 +82,10 @@ class _FavSongs extends State<FavSongs>{
           ),
           ),
           const SizedBox(height: 10),
+          ///Menu hecho para encontrar las letras favoritas de manera local,
+          ///estas letras se guardan dentro del dispositivo para luego
+          ///consultarlas y desplegarlas tal como en la busqueda de letras
+
           Expanded(child: _filteredFiles.isEmpty ? const Center(child: CircularProgressIndicator()) : ListView.builder(
             itemCount: _filteredFiles.length,
               itemBuilder: (context, index){

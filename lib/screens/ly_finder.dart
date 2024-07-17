@@ -22,6 +22,7 @@ class _LyFinder extends State<LyFinder>{
             children: [
               Center(
                 child: Text(
+                  /// Se despliega el titulo de la cancion
                   widget.cancion.title ?? 'Canción no encontrada',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
@@ -33,6 +34,7 @@ class _LyFinder extends State<LyFinder>{
               ),
               const SizedBox(height: 2),
               Text(
+                /// Se despliega el nombre del artista de la canción
                 widget.cancion.artist ?? 'Artista no encontrado',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
@@ -43,11 +45,12 @@ class _LyFinder extends State<LyFinder>{
               ),
               const SizedBox(height: 50),
               Text(
-                  widget.cancion.lyrics ?? '',
-                  style: const TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.white,
-                    fontFamily: 'Geist',
+                /// Se despliegan las letras de la canción
+                widget.cancion.lyrics ?? '',
+                style: const TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.white,
+                  fontFamily: 'Geist',
                   )
               )
             ],

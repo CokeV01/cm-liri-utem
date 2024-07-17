@@ -14,6 +14,8 @@ class RestService{
   static final Logger _logger = Logger();
   static final Dio _client = Dio();
 
+  ///Funcion para el access/all, basicamente se utiliza el idtoken y el email
+  ///para hacer la consulta y retonar la respuesta.
   Future<String> allAccess(String idToken, String email) async{
 
     _logger.d("Acceso para consulta de ingreso del EMAIL: $email");
@@ -46,6 +48,8 @@ class RestService{
     return jsonResponse;
   }
 
+  ///Funcion para el access/login, se retorna la respuesta sin cuerpo,
+  ///al logger para notificar que se entro al servicio rest
   Future<void> access(String idToken) async{
     try {
       _logger.d('Acceso de: $idToken');
@@ -78,7 +82,6 @@ class RestService{
       _logger.d(stackTrace.toString());
     }
   }
-
 }
 
 

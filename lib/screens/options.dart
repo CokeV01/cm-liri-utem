@@ -28,6 +28,7 @@ class _Options extends State<Options>{
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            /// Boton para desloeguearse de la applicacion
             ElevatedButton(onPressed: () async {
               bool conf = await confi.showConfirmationDialog(context, "Cerrando Sesión", "¿Estas seguro que quieres cerrar sesión?");
               if (conf){
@@ -37,6 +38,7 @@ class _Options extends State<Options>{
               }
             }, child: const Text("Cerrar Sesión de Google")),
             SizedBox(height: 5),
+            ///Boton para la lista de accesos del servicio REST
             const LyButtons(texto: "Lista de accesos a la aplicación", route: AccessList())
           ],
         )

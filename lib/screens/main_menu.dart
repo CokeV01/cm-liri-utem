@@ -30,6 +30,10 @@ class MainMenu extends StatelessWidget {
               const SizedBox(
                 height: 100.0,
               ),
+              ///El menu consta de 3 botones de acción, uno para buscar
+              ///la letra, otro para buscar las letras guardadas y otro
+              ///para las opciones.
+              ///Por ultimo se añadió un boton para salir de la app.
               const LyButtons(texto: 'Buscar Lyrics', route: LyScreen()),
               const SizedBox(height: 16.0),
               const LyButtons(texto: 'Tus Lyrics', route: FavSongs()),

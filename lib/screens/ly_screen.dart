@@ -19,13 +19,15 @@ class _LyScreen extends State<LyScreen>{
   static final _logger = Logger();
   bool _isLoading = false;
 
-  //Función asincrona que busca la cancion deseada y retorna una variable Song
+  ///Función asincrona que busca la cancion deseada y retorna una variable Song
+  ///Esta variable song contiene datos relevantes sobre la cancion como el album,
+  ///el artista, y mas importante aun los lyrics de la canción.
   Future<Song?> _searchSong(String art, String title) async {
     Genius genius = Genius(accessToken: "cRzLItZvdT5_R9a7xhCwfmuxELi8Dk6zKV5yrzvdBA-PdUpBifUenRMdNGiBk4U7");
     setState(() {
       _isLoading = true;
     });
-    //Tarea de Carga, busqueda de cancion
+    ///Tarea de Carga, busqueda de cancion
     Song? song = (await genius.searchSong(artist: textControl1.text, title: textControl2.text));
     setState(() {
       _isLoading = false;
@@ -35,6 +37,9 @@ class _LyScreen extends State<LyScreen>{
 
   @override
   Widget build(BuildContext context) {
+
+    ///Al cargar la canción la pantalla es bloqueada hasta que se muestre una respuesta
+    ///si es correcta la busqueda mostrara los lyrics en la siguiente ventana
     return Scaffold(
       appBar: const MyBar(),
       body: Stack(
